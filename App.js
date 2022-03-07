@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { View } from "react-native";
+import Gallery from "./Gallery";
+import GalleryView from "./GalleryView";
+import { images } from "./images";
 
 export default function App() {
+  const [selectedGalleryView, setSelectedGalleryView] = useState(false);
+  const [index, setIndex] = useState(0);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      {selectedGalleryView && (
+        <Gallery
+          selectedGalleryView={selectedGalleryView}
+          setSelectedGalleryView={setSelectedGalleryView}
+          index={index}
+          images={images}
+        />
+      )}
+      {!selectedGalleryView && (
+        <GalleryView
+          selectedGalleryView={selectedGalleryView}
+          setSelectedGalleryView={setSelectedGalleryView}
+          setIndex={setIndex}
+          images={images}
+        />
+      )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
